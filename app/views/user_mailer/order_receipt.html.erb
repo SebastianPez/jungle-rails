@@ -8,6 +8,35 @@
     <p>
       You have successfully submitted and paid for your order.
     </p>
+    <div class="order-summary jumbotron">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% LineItem.where(order_id:@order).each do |item| %>
+          <% Product.where(id:item.product_id).each do |product| %>
+              <%= render 'item', product:product, quantity:item.quantity.to_i %>
+          <% end %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4">
+            TOTAL:
+          </th>
+          <th>
+            <%= @order.total_cents / 100.0 %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
     <p>Thanks for shopping with Jungle and have a great day!</p>
   </body>
 </html>

@@ -1,8 +1,9 @@
 class UserMailer < ApplicationMailer
   default from: 'noreply@jungle.com'
 
-  def order_receipt(user)
+  def order_receipt(user, order)
     @user = user
-    mail(to: @user.email, subject: 'Thank you for ordering with Jungle!')
+    @order = order
+    mail(to: @user.email, subject: "Thank you for ordering with Jungle! Your order id: #{@order.id}")
   end
 end
