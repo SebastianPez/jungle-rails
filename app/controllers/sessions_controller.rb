@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     # method to see if the password submitted on the login form was correct: 
     if user && user.authenticate(params[:login][:password]) 
       # Save the user.id in that user's session cookie:
-      session[:user_id] = user.id.to_s
+      session[:user_id] = user.id
       redirect_to root_path, notice: 'Successfully logged in!'
     else
       # if email or password incorrect, re-render login page:
